@@ -1,0 +1,49 @@
+﻿using System; // Unused using - the following usings are useless code that causes a higher number of code lines and may cause conflicts in namings
+using System.Collections.Generic; // Unused using
+using System.IO; // unused using
+using System.Reflection.Metadata; // Unused using
+using System.Xml.Linq;
+using Newtonsoft.Json;
+using static System.Net.WebRequestMethods;
+
+namespace Moravia.Homework
+{
+    public class Document // Class should be in a separate file (according to the C# coding conventions)
+    {
+        public string Title { get; set; }
+        public string Text { get; set; }
+    }
+
+    class Program
+    {
+        static void Main(string[] args) // Args are not used in the code and they can be removed
+        {
+            var sourceFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\SourceFiles\\Document1.xml"); // File location may be used as a constant
+            var targetFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\TargetFiles\\Document1.json"); // File location may be used as a constant
+
+            try
+            {
+                FileStream sourceStream = File.Open(sourceFileName, FileMode.Open); // File is ambigious reference, build error
+                var reader = new StreamReader(sourceStream); // StreamReader should be disposed properly with 'using' clause
+                string input = reader.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message); // Re-throwing the exception causes a lose a context from the previous exception, e.g. its stack trace
+            }
+
+            // The following code is not wrapped in try-catch blocks, so any exception results in application collapse
+            var xdoc = XDocument.Parse(input); // Input is unavailable in this context, build error 
+            var doc = new Document
+            {
+                Title = xdoc.Root.Element("title").Value, // This assignment may end up in NullReferenceException, since Element may not exist and so neither its Value
+                Text = xdoc.Root.Element("text").Value // The same issue as above
+            };
+
+            var serializedDoc = JsonConvert.SerializeObject(doc);
+            var targetStream = File.Open(targetFileName, FileMode.Create, FileAccess.Write); // File should be disposed properly with 'using' clause
+            var sw = new StreamWriter(targetStream); // This should be also disposed properly with 'using' clause
+            sw.Write(serializedDoc);
+        }
+    }
+}

@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
-using RwsMoraviaHomework.Constants;
 using RwsMoraviaHomework.Contracts;
 using RwsMoraviaHomework.Models;
 using System.Xml.Linq;
 
 namespace RwsMoraviaHomework.Converters
 {
-    public class XmlConverter : IConverter
+    public class XmlConverter : ConverterBase
     {
         private readonly IFileReader _reader;
         private readonly IFileWriter _writer;
@@ -20,29 +19,8 @@ namespace RwsMoraviaHomework.Converters
             _writer = writer;
         }
 
-        public void Convert() // toto sa opakuje u vsetkych a smrdi to abstraktnou triedou !!!
-        {
-            var targetFileExtention = _writer.GetDestinationType();
 
-            switch (targetFileExtention)
-            {
-                case SupportedOutputTypes.Json:
-                    {
-                        ConvertToJson();
-                        return;
-                    }
-                case SupportedOutputTypes.Xml:
-                    {
-                        ConvertToXml();
-                        return;
-                    }
-                default:
-                    Console.WriteLine("Target file type is not supported.");
-                    throw new ArgumentException("Unsupported target file type.");
-            }
-        }
-
-        public void ConvertToJson()
+        public override void ConvertToJson()
         {
             var content = _reader.Read();
 
@@ -62,7 +40,7 @@ namespace RwsMoraviaHomework.Converters
             _writer.WriteToFile(serializedDoc);
         }
 
-        public void ConvertToXml()
+        public override void ConvertToXml()
         {
             var content = _reader.Read();
 

@@ -1,5 +1,6 @@
 ﻿using RwsMoraviaHomework.Constants;
 using RwsMoraviaHomework.Readers;
+using RwsMoraviaHomework.Utils;
 using RwsMoraviaHomework.Writers;
 
 namespace Moravia.Homework
@@ -27,7 +28,8 @@ namespace Moravia.Homework
 
             try
             {
-                converter.Convert();
+                var targetFileExtention = FileExtentionUtils.GetFileExtention(targetFileName);
+                converter.Convert(targetFileExtention);
             }
             catch (Exception ex)
             {

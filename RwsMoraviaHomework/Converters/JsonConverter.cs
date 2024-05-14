@@ -1,53 +1,27 @@
 ﻿using Newtonsoft.Json;
-using RwsMoraviaHomework.Constants;
 using RwsMoraviaHomework.Contracts;
 
 namespace RwsMoraviaHomework.Converters
 {
-    public class JsonConverter : IConverter
+    public class JsonConverter : ConverterBase
     {
         private readonly IFileReader _reader;
         private readonly IFileWriter _writer;
 
         public JsonConverter(IFileReader reader, IFileWriter writer)
         {
-            ArgumentNullException.ThrowIfNull(reader);
-            ArgumentNullException.ThrowIfNull(writer);
-
             _reader = reader;
             _writer = writer;
         }
 
-        public void Convert()
-        {
-            var targetFileExtention = _writer.GetDestinationType();
-
-            switch (targetFileExtention)
-            {
-                case SupportedOutputTypes.Json:
-                    {
-                        ConvertToJson();
-                        return;
-                    }
-                case SupportedOutputTypes.Xml:
-                    {
-                        ConvertToXml();
-                        return;
-                    }
-                default:
-                    Console.WriteLine("Target file type is not supported.");
-                    throw new ArgumentException("Unsupported target file type.");
-            }
-        }
-
-        public void ConvertToJson()
+        public override void ConvertToJson()
         {
             var content = _reader.Read();
 
             _writer.WriteToFile(content);
         }
 
-        public void ConvertToXml()
+        public override void ConvertToXml()
         {
             var content = _reader.Read();
 

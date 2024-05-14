@@ -19,8 +19,7 @@ namespace RwsMoraviaHomework.Writers
                     }
                 default:
                     {
-                        Console.WriteLine("File location is not supported.");
-                        throw new ArgumentException("Unsupported file location.");
+                        throw new ArgumentException($"{storage} storage is not supported.");
                     }
             }
         }

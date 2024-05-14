@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using RwsMoraviaHomework.Contracts;
-using RwsMoraviaHomework.Utils;
+﻿using RwsMoraviaHomework.Contracts;
 
 namespace RwsMoraviaHomework.Writers
 {
@@ -13,13 +11,6 @@ namespace RwsMoraviaHomework.Writers
             _path = path;
         }
 
-        public void CanWrite()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetDestinationType() => FileExtentionUtils.GetFileExtention(_path);
-
         public void WriteToFile(string content)
         {
             using (var targetStream = File.Open(_path, FileMode.Create, FileAccess.Write))
@@ -28,7 +19,7 @@ namespace RwsMoraviaHomework.Writers
                 sw.Write(content);
             }
 
-            Console.WriteLine($"Saved to {_path}.");
+            Console.WriteLine($"Content saved to {_path}.");
         }
     }
 }

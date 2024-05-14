@@ -2,7 +2,8 @@
 
 namespace RwsMoraviaHomework.Readers
 {
-    public class CloudStorageReader : IFileReader // netreba implementovat, len ukazkovo
+    // Example of additional file reader; not implemented yet
+    public class CloudStorageReader : IFileReader
     {
         private readonly string _path;
 
@@ -11,7 +12,7 @@ namespace RwsMoraviaHomework.Readers
             _path = path;
         }
 
-        public string Read()
+        public string ReadFromFile()
         {
             throw new NotImplementedException();
         }

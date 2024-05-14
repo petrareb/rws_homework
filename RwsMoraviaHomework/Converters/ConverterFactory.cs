@@ -26,8 +26,7 @@ namespace RwsMoraviaHomework.Readers
                     }
                 default:
                     {
-                        Console.WriteLine("File type is not supported.");
-                        throw new ArgumentException("Unsupported file type, unable to read from the file");
+                        throw new ArgumentException($"Source file type {fileExtention} is not supported.");
                     }
 
             }

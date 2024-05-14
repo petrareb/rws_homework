@@ -19,15 +19,14 @@ namespace RwsMoraviaHomework.Converters
             _writer = writer;
         }
 
-
         public override void ConvertToJson()
         {
-            var content = _reader.Read();
+            var content = _reader.ReadFromFile();
 
             var xdoc = XDocument.Parse(content);
             if (xdoc.Root is null)
             {
-                throw new NullReferenceException("something happened and doc was not created correctly");
+                throw new ArgumentException("Source XML file is not valid; unable to read.");
             }
 
             var doc = new Document
@@ -42,7 +41,7 @@ namespace RwsMoraviaHomework.Converters
 
         public override void ConvertToXml()
         {
-            var content = _reader.Read();
+            var content = _reader.ReadFromFile();
 
             _writer.WriteToFile(content);
         }

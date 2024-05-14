@@ -1,25 +1,13 @@
 ﻿using RwsMoraviaHomework.Contracts;
-using RwsMoraviaHomework.Utils;
 
 namespace RwsMoraviaHomework.Writers
 {
+    // Example of additional file writer; not implemented yet
     public class CloudStorageWriter : IFileWriter
     {
-        private readonly string _path;
 
         public CloudStorageWriter(string path)
         {
-            _path = path;
-        }
-
-        public void CanWrite()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetDestinationType()
-        {
-            throw new NotImplementedException();
         }
 
         public void WriteToFile(string content)

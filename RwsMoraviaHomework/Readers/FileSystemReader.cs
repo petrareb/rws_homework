@@ -11,20 +11,18 @@ namespace RwsMoraviaHomework.Readers
             _path = path;
         }
 
-        public string Read()
+        public string ReadFromFile()
         {
-            try
-            {
-                using (var sourceStream = File.Open(_path, FileMode.Open))
-                using (var reader = new StreamReader(sourceStream))
-                {
-                    string input = reader.ReadToEnd();
-                    return input;
-                }
+            if (!File.Exists(_path)) 
+            { 
+                throw new FileNotFoundException(_path); 
             }
-            catch (Exception ex) // TODO - tryRead a vratit ked tak null???
+
+            using (var sourceStream = File.Open(_path, FileMode.Open))
+            using (var reader = new StreamReader(sourceStream))
             {
-                throw new Exception(ex.Message);
+                string input = reader.ReadToEnd();
+                return input;
             }
         }
     }

@@ -16,14 +16,14 @@ namespace RwsMoraviaHomework.Converters
 
         public override void ConvertToJson()
         {
-            var content = _reader.Read();
+            var content = _reader.ReadFromFile();
 
             _writer.WriteToFile(content);
         }
 
         public override void ConvertToXml()
         {
-            var content = _reader.Read();
+            var content = _reader.ReadFromFile();
 
             var xmlContent = JsonConvert.DeserializeXmlNode(content, "Root");
             var stream = xmlContent?.ToString() ?? string.Empty;

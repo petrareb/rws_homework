@@ -5,7 +5,7 @@ namespace RwsMoraviaHomework.Readers
 {
     public class ReaderFactory
     {
-        public static IFileReader CreateFileReader(string path, string storage) // TODOOOO: ako rozpoznat ulozisko?
+        public static IFileReader CreateFileReader(string path, string storage)
         {
             switch (storage)
             {
@@ -19,8 +19,7 @@ namespace RwsMoraviaHomework.Readers
                     }
                 default:
                     {
-                        Console.WriteLine("File location is not supported.");
-                        throw new ArgumentException("Unsupported file location.");
+                        throw new ArgumentException($"{storage} storage is not supported.");
                     }
             }
         }

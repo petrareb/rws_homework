@@ -20,7 +20,7 @@ namespace RwsMoraviaHomework.Converters
                         return;
                     }
                 default:
-                    throw new ArgumentException($"Target file type {targetFileExtention} is not supported.");
+                    throw new ArgumentException($"Target file type {targetFileExtention} is not supported. These types are supported: {SupportedOutputTypes.GetDescription()}.");
             }
         }
 

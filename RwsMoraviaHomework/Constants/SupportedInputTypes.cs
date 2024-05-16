@@ -4,5 +4,7 @@
     {
         public const string Json = ".json";
         public const string Xml = ".xml";
+
+        public static string GetDescription() => $"{Json} and {Xml}";
     }
 }

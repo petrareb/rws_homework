@@ -5,7 +5,7 @@ using RwsMoraviaHomework.Utils;
 
 namespace RwsMoraviaHomework.Readers
 {
-    public class ConverterFactory
+    public static class ConverterFactory
     {
         public static IConverter CreateConverter(string sourceFileName, IFileReader reader, IFileWriter writer)
         {
@@ -26,7 +26,7 @@ namespace RwsMoraviaHomework.Readers
                     }
                 default:
                     {
-                        throw new ArgumentException($"Source file type {fileExtention} is not supported.");
+                        throw new ArgumentException($"Source file type is not supported. These types are supported: {SupportedInputTypes.GetDescription()}.");
                     }
 
             }

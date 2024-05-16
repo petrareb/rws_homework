@@ -1,18 +1,17 @@
 ﻿using RwsMoraviaHomework.Constants;
 using RwsMoraviaHomework.Contracts;
 using RwsMoraviaHomework.Converters;
-using RwsMoraviaHomework.Utils;
 
 namespace RwsMoraviaHomework.Readers
 {
     public static class ConverterFactory
     {
-        public static IConverter CreateConverter(string sourceFileName, IFileReader reader, IFileWriter writer)
+        public static IConverter CreateConverter(IFileReader? reader, IFileWriter? writer)
         {
             ArgumentNullException.ThrowIfNull(reader, nameof(reader));
             ArgumentNullException.ThrowIfNull(writer, nameof(writer));
 
-            var fileExtention = FileExtentionUtils.GetFileExtention(sourceFileName);
+            var fileExtention = reader.GetFileToReadExtention();
 
             switch (fileExtention)
             {
@@ -28,7 +27,6 @@ namespace RwsMoraviaHomework.Readers
                     {
                         throw new ArgumentException($"Source file type is not supported. These types are supported: {SupportedInputTypes.GetDescription()}.");
                     }
-
             }
         }
     }

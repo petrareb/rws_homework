@@ -1,4 +1,5 @@
 ﻿using RwsMoraviaHomework.Contracts;
+using RwsMoraviaHomework.Utils;
 
 namespace RwsMoraviaHomework.Writers
 {
@@ -8,8 +9,16 @@ namespace RwsMoraviaHomework.Writers
 
         public FileSystemWriter(string path)
         {
-            _path = path;
+            var trimmedPath = path.Trim();
+            if (string.IsNullOrEmpty(trimmedPath))
+            {
+                throw new ArgumentException("Target file path mustn't be empty.");
+            }
+
+            _path = Path.Combine(Environment.CurrentDirectory, trimmedPath);
         }
+
+        public string GetFileToWriteExtention() => FileExtentionUtils.GetFileExtention(_path);
 
         public void WriteToFile(string content)
         {

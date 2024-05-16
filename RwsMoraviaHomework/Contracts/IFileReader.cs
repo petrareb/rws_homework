@@ -3,5 +3,6 @@
     public interface IFileReader
     {
         public string ReadFromFile();
+        public string GetFileToReadExtention();
     }
 }

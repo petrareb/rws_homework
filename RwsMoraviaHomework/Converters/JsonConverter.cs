@@ -25,7 +25,7 @@ namespace RwsMoraviaHomework.Converters
         {
             var content = _reader.ReadFromFile();
 
-            var xmlContent = JsonConvert.DeserializeXmlNode(content, "Root");
+            var xmlContent = JsonConvert.DeserializeXNode(content);
             var stream = xmlContent?.ToString() ?? string.Empty;
             _writer.WriteToFile(stream);
         }

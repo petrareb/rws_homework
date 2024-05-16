@@ -10,6 +10,11 @@ namespace RwsMoraviaHomework.Writers
         {
         }
 
+        public string GetFileToWriteExtention()
+        {
+            throw new NotImplementedException();
+        }
+
         public void WriteToFile(string content)
         {
             throw new NotImplementedException();

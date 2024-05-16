@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
-using RwsMoraviaHomework.Converters.Contracts;
+using RwsMoraviaHomework.Constants;
+using RwsMoraviaHomework.Contracts;
 using RwsMoraviaHomework.Models;
 using System.Xml.Linq;
 

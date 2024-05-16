@@ -1,6 +1,4 @@
-﻿using RwsMoraviaHomework.Models;
-
-namespace RwsMoraviaHomework.Converters.Contracts
+﻿namespace RwsMoraviaHomework.Contracts
 {
     public interface IFileWriter
     {

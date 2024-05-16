@@ -1,4 +1,4 @@
-﻿namespace RwsMoraviaHomework.Converters.Contracts
+﻿namespace RwsMoraviaHomework.Contracts
 {
     public interface IFileReader
     {

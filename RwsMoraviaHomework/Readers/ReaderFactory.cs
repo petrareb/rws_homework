@@ -1,18 +1,19 @@
-﻿using RwsMoraviaHomework.Converters.Contracts;
+﻿using RwsMoraviaHomework.Constants;
+using RwsMoraviaHomework.Contracts;
 
 namespace RwsMoraviaHomework.Readers
 {
     public class ReaderFactory
     {
-        public static IFileReader CreateFileReader(string path) // TODOOOO: ako rozpoznat ulozisko?
+        public static IFileReader CreateFileReader(string path, string storage) // TODOOOO: ako rozpoznat ulozisko?
         {
-            switch (path)
+            switch (storage)
             {
-                case "FileSystem":
+                case SupportedStorages.FileSystem:
                     {
                         return new FileSystemReader(path);
                     }
-                case "Cloud":
+                case SupportedStorages.Cloud:
                     {
                         return new CloudStorageReader(path);
                     }

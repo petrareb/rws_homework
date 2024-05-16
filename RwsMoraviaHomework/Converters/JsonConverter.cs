@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using RwsMoraviaHomework.Converters.Contracts;
-using RwsMoraviaHomework.Models;
+using RwsMoraviaHomework.Constants;
+using RwsMoraviaHomework.Contracts;
 
 namespace RwsMoraviaHomework.Converters
 {

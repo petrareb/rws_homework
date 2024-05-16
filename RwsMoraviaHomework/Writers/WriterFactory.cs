@@ -1,18 +1,19 @@
-﻿using RwsMoraviaHomework.Converters.Contracts;
+﻿using RwsMoraviaHomework.Constants;
+using RwsMoraviaHomework.Contracts;
 
 namespace RwsMoraviaHomework.Writers
 {
     public class WriterFactory
     {
-        public static IFileWriter CreateFileWriter(string path)
+        public static IFileWriter CreateFileWriter(string path, string storage)
         {
-            switch (path)
+            switch (storage)
             {
-                case "FileSystem":
+                case SupportedStorages.FileSystem:
                     {
                         return new FileSystemWriter(path);
                     }
-                case "Cloud":
+                case SupportedStorages.Cloud:
                     {
                         return new CloudStorageWriter(path);
                     }

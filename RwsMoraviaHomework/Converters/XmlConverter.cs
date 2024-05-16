@@ -10,7 +10,7 @@ namespace RwsMoraviaHomework.Converters
         private readonly IFileReader _reader;
         private readonly IFileWriter _writer;
 
-        public XmlConverter(IFileReader reader, IFileWriter writer)
+        public XmlConverter(IFileReader reader, IFileWriter writer) : base(writer)
         {
             ArgumentNullException.ThrowIfNull(reader);
             ArgumentNullException.ThrowIfNull(writer);

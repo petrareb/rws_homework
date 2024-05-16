@@ -24,8 +24,7 @@ namespace Moravia.Homework
                 var writer = WriterFactory.CreateFileWriter(targetFileName, targetStorage);
                 var converter = ConverterFactory.CreateConverter(reader, writer);
 
-                var targetFileExtention = writer.GetFileToWriteExtention();
-                converter.Convert(targetFileExtention);
+                converter.Convert();
             }
             catch (Exception ex)
             {

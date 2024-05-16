@@ -2,7 +2,7 @@
 {
     public interface IConverter
     {
-        public void Convert(string targetFileExtention);
+        public void Convert();
         public void ConvertToJson();
         public void ConvertToXml();
     }

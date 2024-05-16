@@ -8,7 +8,7 @@ namespace RwsMoraviaHomework.Converters
         private readonly IFileReader _reader;
         private readonly IFileWriter _writer;
 
-        public JsonConverter(IFileReader reader, IFileWriter writer)
+        public JsonConverter(IFileReader reader, IFileWriter writer) : base(writer)
         {
             _reader = reader;
             _writer = writer;
@@ -27,6 +27,7 @@ namespace RwsMoraviaHomework.Converters
 
             var xmlContent = JsonConvert.DeserializeXNode(content);
             var stream = xmlContent?.ToString() ?? string.Empty;
+
             _writer.WriteToFile(stream);
         }
     }

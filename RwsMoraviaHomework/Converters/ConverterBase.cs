@@ -5,8 +5,16 @@ namespace RwsMoraviaHomework.Converters
 {
     public abstract class ConverterBase : IConverter
     {
-        public void Convert(string targetFileExtention)
+        private readonly IFileWriter _writer;
+
+        public ConverterBase(IFileWriter writer)
         {
+            _writer = writer;
+        }
+
+        public void Convert()
+        {
+            var targetFileExtention = _writer.GetFileToWriteExtention();
             switch (targetFileExtention)
             {
                 case SupportedOutputTypes.Json:

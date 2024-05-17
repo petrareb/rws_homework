@@ -6,20 +6,30 @@ namespace Tests.Writers
     [TestFixture]
     public class WriterFactoryTests
     {
-        [TestCase("")]
-        [TestCase("somewhere")]
-        public void CreateFileWriter_InvalidStorage_ThrowsArgumentException(string storage)
+        [Test]
+        public void CreateFileWriter_InvalidStorage_ThrowsArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => WriterFactory.CreateFileWriter("some_path", storage), message: $"{storage} storage is not supported.");
+            var storage = "somewhere";
+
+            var exception = Assert.Throws<ArgumentException>(() => WriterFactory.CreateFileWriter(storage));
+            Assert.That(exception.Message, Is.EqualTo($"{storage} storage is not supported."));
+        }
+
+        [Test]
+        public void CreateFileWriter_StorageIsEmptyString_ThrowsArgumentException()
+        {
+            string storage = string.Empty;
+
+            var exception = Assert.Throws<ArgumentException>(() => WriterFactory.CreateFileWriter(storage));
+            Assert.That(exception.Message, Is.EqualTo("Target storage was not defined."));
         }
 
         [Test]
         public void CreateFileWriter_FileSystemStorage_ReturnsFileSystemWriter()
         {
             var storage = SupportedStorages.FileSystem;
-            var path = "file_system_path";
 
-            var writer = WriterFactory.CreateFileWriter(path, storage);
+            var writer = WriterFactory.CreateFileWriter(storage);
 
             Assert.That(writer, Is.TypeOf<FileSystemWriter>());
         }
@@ -28,9 +38,8 @@ namespace Tests.Writers
         public void CreateFileWriter_CloudStorage_ReturnsCloudWriter()
         {
             var storage = SupportedStorages.Cloud;
-            var path = "cloud_storage_path";
 
-            var writer = WriterFactory.CreateFileWriter(path, storage);
+            var writer = WriterFactory.CreateFileWriter(storage);
 
             Assert.That(writer, Is.TypeOf<CloudStorageWriter>());
         }

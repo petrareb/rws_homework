@@ -20,7 +20,8 @@ namespace Tests.Utils
         [TestCase("   ")]
         public void GetFileExtention_InalidFile_ThrowsArgumentException(string file)
         {
-            Assert.Throws<ArgumentException>(() => FileExtentionUtils.GetFileExtention(file), message: "Invalid source file, unable to get file extention.");
+            var exception = Assert.Throws<ArgumentException>(() => FileExtentionUtils.GetFileExtention(file));
+            Assert.That(exception.Message, Is.EqualTo("Invalid file, unable to get file extention."));
         }
     }
 }

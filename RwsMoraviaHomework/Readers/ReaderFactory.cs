@@ -5,17 +5,22 @@ namespace RwsMoraviaHomework.Readers
 {
     public class ReaderFactory
     {
-        public static IFileReader CreateFileReader(string path, string storage)
+        public static IFileReader CreateFileReader(string storage)
         {
+            if (string.IsNullOrEmpty(storage))
+            {
+                throw new ArgumentException("Source storage was not defined.");
+            }
+
             switch (storage)
             {
                 case SupportedStorages.FileSystem:
                     {
-                        return new FileSystemReader(path);
+                        return new FileSystemReader();
                     }
                 case SupportedStorages.Cloud:
                     {
-                        return new CloudStorageReader(path);
+                        return new CloudStorageReader();
                     }
                 default:
                     {

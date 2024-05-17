@@ -1,5 +1,7 @@
 ﻿using RwsMoraviaHomework.Constants;
+using RwsMoraviaHomework.Deserializers;
 using RwsMoraviaHomework.Readers;
+using RwsMoraviaHomework.Serializers;
 using RwsMoraviaHomework.Writers;
 
 namespace Moravia.Homework
@@ -8,23 +10,28 @@ namespace Moravia.Homework
     {
         static void Main()
         {
-            Console.WriteLine("Define path to the source file.");
+            Console.WriteLine("* Define path to the source file:");
             var sourceFileName = Console.ReadLine()?.Trim() ?? string.Empty;
-            Console.WriteLine($"Define storage for source. {SupportedStorages.GetDescription()}");
+            Console.WriteLine($"* Define storage for source ({SupportedStorages.GetDescription()}):");
             var sourceStorage = Console.ReadLine()?.Trim().ToLower() ?? string.Empty;
 
-            Console.WriteLine("Define path to the target file.");
+            Console.WriteLine("* Define path to the target file:");
             var targetFileName = Console.ReadLine()?.Trim() ?? string.Empty;
-            Console.WriteLine($"Define storage for target. {SupportedStorages.GetDescription()}");
+            Console.WriteLine($"* Define storage for target ({SupportedStorages.GetDescription()}):");
             var targetStorage = Console.ReadLine()?.Trim().ToLower() ?? string.Empty;
+            Console.WriteLine();
 
             try
             {
-                var reader = ReaderFactory.CreateFileReader(sourceFileName, sourceStorage);
-                var writer = WriterFactory.CreateFileWriter(targetFileName, targetStorage);
-                var converter = ConverterFactory.CreateConverter(reader, writer);
+                var reader = ReaderFactory.CreateFileReader(sourceStorage);
+                var deserializer = DeserializerFactory.CreateDeserializer(sourceFileName);
+                var serializer = SerializerFactory.CreateSerializer(targetFileName);
+                var writer = WriterFactory.CreateFileWriter(targetStorage);
 
-                converter.Convert();
+                var fileContent = reader.ReadFromFile(sourceFileName);
+                var deserializedContent = deserializer.Deserialize(fileContent);
+                var serializedContent = serializer.Serialize(deserializedContent);
+                writer.WriteToFile(targetFileName, serializedContent);
             }
             catch (Exception ex)
             {

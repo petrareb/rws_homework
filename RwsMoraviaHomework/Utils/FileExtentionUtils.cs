@@ -7,7 +7,7 @@
             var fileExtention = Path.GetExtension(sourceFileName);
             if (string.IsNullOrEmpty(fileExtention))
             {
-                throw new ArgumentException("Invalid source file, unable to get file extention.");
+                throw new ArgumentException("Invalid file, unable to get file extention.");
             }
 
             return fileExtention;

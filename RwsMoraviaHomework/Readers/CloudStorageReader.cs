@@ -5,16 +5,11 @@ namespace RwsMoraviaHomework.Readers
     // Example of additional file reader; not implemented yet
     public class CloudStorageReader : IFileReader
     {
-        public CloudStorageReader(string path)
+        public CloudStorageReader()
         {
         }
 
-        public string GetFileToReadExtention()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ReadFromFile()
+        public string ReadFromFile(string path)
         {
             throw new NotImplementedException();
         }

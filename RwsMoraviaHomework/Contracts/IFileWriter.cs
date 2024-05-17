@@ -2,7 +2,6 @@
 {
     public interface IFileWriter
     {
-        public void WriteToFile(string content);
-        public string GetFileToWriteExtention();
+        public void WriteToFile(string path, string content);
     }
 }
